@@ -51,10 +51,14 @@ export default class Currency {
         // console.log(num_array.length)
 
         var intPart = num_array[0]
+        if (intPart == '0') {
+            intPart = ''
+        }
+
         if (num_array.length == 1) {
 
 
-            var decPart = ""
+            var decPart = ''
         } else {
 
             var decPart = num_array[1]
@@ -173,71 +177,74 @@ export default class Currency {
 
             // console.log(result)
 
-
-            //        dec part
-            var dec_section = {
-                strNumber: decPart,
-                strLen: decPart.length,
-                isZero: true,
-                hasZero: false
-            }
-
-
-            var restr = ''
-            var len = 2
-
-            for (var i = 0; i < decPart.length; i++) {
-                var c = decPart[i]
-                if (c == "0") {
-
-                    dec_section["hasZero"] = true
-
-                    len -= 1
-
-                } else {
-                    dec_section["isZero"] = false
-
-
-
-                    if (dec_section["hasZero"] == true &&
-                        int_part_len > 0) {
-                        restr += "零"
-                        dec_section["hasZero"] = false
-                    }
-
-                    len -= 1
-                    restr += char_number_dict[c] + dec_unit[len]
-                }
-            }
-
-
-
-            result.push(restr)
-
-
-            if (restr.indexOf("分") == -1) {
-                result.push("整")
-            }
-
-
-
-            var upperText = ''
-
-            // console.log('see result')
-            // console.log(result)
-
-            // var r
-            for (var r in result) {
-                // console.log(r)
-                upperText += result[r]
-            }
-
-
-
-            console.log(upperText)
-            return upperText
-
         }
+        //        dec part
+        var dec_section = {
+            strNumber: decPart,
+            strLen: decPart.length,
+            isZero: true,
+            hasZero: false
+        }
+
+
+        var restr = ''
+        var len = 2
+
+        for (var i = 0; i < decPart.length; i++) {
+            var c = decPart[i]
+            if (c == "0") {
+
+                dec_section["hasZero"] = true
+
+                len -= 1
+
+            } else {
+                dec_section["isZero"] = false
+
+
+
+                if (dec_section["hasZero"] == true &&
+                    int_part_len >
+                    0) {
+                    restr += "零"
+                    dec_section["hasZero"] = false
+                }
+
+                len -= 1
+                restr += char_number_dict[c] + dec_unit[len]
+            }
+        }
+
+
+
+        result.push(restr)
+
+
+        if (restr.indexOf("分") == -1 && 
+            dec_section["isZero"] == false) {
+
+            result.push("整")
+        }
+
+
+
+        var upperText = ''
+
+        // console.log('see result')
+        // console.log(result)
+
+        // var r
+        for (var r in result) {
+            // console.log(r)
+            upperText += result[r]
+        }
+
+
+
+        console.log(upperText)
+        return upperText
+
+
 
     }
 
