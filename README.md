@@ -1,5 +1,5 @@
 # money2chn
-A javascript class that transform money to Chinese uppercase.
+A javascript ES6 class that transform money to Chinese uppercase. Used in vue.js component.
 
 
 ## Usage
